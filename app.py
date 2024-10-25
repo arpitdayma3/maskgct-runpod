@@ -19,10 +19,13 @@ from models.tts.maskgct.g2p.g2p_generation import g2p, chn_eng_g2p
 
 from transformers import SeamlessM4TFeatureExtractor
 import py3langid as langid
+import devicetorch
 
 
 processor = SeamlessM4TFeatureExtractor.from_pretrained("facebook/w2v-bert-2.0")
-device = torch.device("cuda" if torch.cuda.is_available() else "CPU")
+DEVICE_NAME = devicetorch.get(torch)
+device = torch.device(DEVICE_NAME)
+#device = torch.device("cuda" if torch.cuda.is_available() else "CPU")
 whisper_model = None
 output_file_name_idx = 0
 
@@ -356,7 +359,7 @@ def maskgct_inference(
     return recovered_audio
 
 
-@spaces.GPU
+#@spaces.GPU
 def inference(
     prompt_wav,
     target_text,
