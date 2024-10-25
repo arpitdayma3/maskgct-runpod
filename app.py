@@ -1,4 +1,4 @@
-import spaces
+#import spaces
 import accelerate
 import gradio as gr
 import torch
