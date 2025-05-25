@@ -55,7 +55,7 @@ RUN conda run -n amphion pip install --no-cache-dir -r requirements.txt
 RUN conda init \
     && echo "\nconda activate amphion\n" >> ~/.bashrc
 
-CMD ["/bin/bash"]
+CMD ["conda", "run", "-n", "amphion", "python", "handler.py"]
 
 # *** Build ***
 # docker build -t realamphion/amphion .
