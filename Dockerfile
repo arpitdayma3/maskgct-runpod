@@ -20,10 +20,7 @@ ENV PATH=$CONDA_HOME/bin:$CUDA_HOME/bin:$PATH \
     NCCL_HOME=$CUDA_HOME
 
 # Install ubuntu packages
-RUN sed -i 's/archive.ubuntu.com/mirrors.cloud.tencent.com/g' /etc/apt/sources.list \
-    && sed -i 's/security.ubuntu.com/mirrors.cloud.tencent.com/g' /etc/apt/sources.list \
-    && rm /etc/apt/sources.list.d/cuda.list \
-    && apt-get update \
+RUN apt-get update \
     && apt-get -y install \
     python3-pip ffmpeg git less wget libsm6 libxext6 libxrender-dev \
     build-essential cmake pkg-config libx11-dev libatlas-base-dev \
