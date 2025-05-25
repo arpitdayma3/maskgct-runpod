@@ -42,10 +42,15 @@ RUN wget -t 0 -c -O /tmp/anaconda.sh https://repo.anaconda.com/miniconda/${MINIC
 RUN conda create -y --name amphion python=3.9.15
 
 WORKDIR /app
-COPY env.sh env.sh
-RUN chmod +x ./env.sh
+COPY requirements.txt requirements.txt
 
-RUN ["conda", "run", "-n", "amphion", "-vvv", "--no-capture-output", "./env.sh"]
+# If other source files are needed for any package in requirements.txt to build,
+# they might need to be copied earlier. For now, assume requirements.txt is self-contained
+# or dependencies are fetched from PyPI.
+# Consider adding COPY . /app if full context is needed for pip install.
+
+# Install Python packages from requirements.txt into the 'amphion' conda environment
+RUN conda run -n amphion pip install --no-cache-dir -r requirements.txt
 
 RUN conda init \
     && echo "\nconda activate amphion\n" >> ~/.bashrc
