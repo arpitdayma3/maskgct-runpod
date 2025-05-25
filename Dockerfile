@@ -47,7 +47,7 @@ COPY requirements.txt requirements.txt
 # Consider adding COPY . /app if full context is needed for pip install.
 
 # Install Python packages from requirements.txt into the 'amphion' conda environment
-RUN conda run -n amphion pip install --no-cache-dir -r requirements.txt
+RUN conda run -n amphion pip install -vvv --no-cache-dir -r requirements.txt
 
 RUN conda init \
     && echo "\nconda activate amphion\n" >> ~/.bashrc
